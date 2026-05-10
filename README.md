@@ -13,7 +13,7 @@ A clean, minimal developer portfolio built with Next.js 15, Tailwind CSS v4, and
 
 ## Stack
 
-- [Next.js](https://nextjs.org/) 15 (App Router)
+- [Next.js](https://nextjs.org/) 16 (App Router)
 - [React](https://react.dev/) 19
 - [Tailwind CSS](https://tailwindcss.com/) v4
 - [shadcn/ui](https://ui.shadcn.com/) components
