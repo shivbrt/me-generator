@@ -16,7 +16,7 @@ export default function Portfolio() {
                 <HeroSection config={config} />
                 <AboutSection config={config} />
                 <ProjectsSection config={config} />
-                <BlogPostsSection />
+                <BlogPostsSection config={config} />
             </main>
             <SiteFooter config={config} />
         </div>

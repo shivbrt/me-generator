@@ -5,6 +5,13 @@ export interface Project {
     link: string;
 }
 
+export interface BlogPost {
+    title: string;
+    date: string;
+    description: string;
+    link: string;
+}
+
 export interface PortfolioConfig {
     name: string;
     role: string;
@@ -18,14 +25,15 @@ export interface PortfolioConfig {
     twitter: string;
     skills: string[];
     projects: Project[];
+    blogPosts: BlogPost[];
 }
 
-function parseProjects(raw: string | undefined): Project[] {
-    if (!raw) return defaultConfig.projects;
+function parseJSON<T>(raw: string | undefined, fallback: T): T {
+    if (!raw) return fallback;
     try {
-        return JSON.parse(raw) as Project[];
+        return JSON.parse(raw) as T;
     } catch {
-        return defaultConfig.projects;
+        return fallback;
     }
 }
 
@@ -47,6 +55,7 @@ export const defaultConfig: PortfolioConfig = {
     twitter: "",
     skills: ["React", "Node.js", "TypeScript"],
     projects: [],
+    blogPosts: [],
 };
 
 export function getPortfolioConfig(): PortfolioConfig {
@@ -62,6 +71,7 @@ export function getPortfolioConfig(): PortfolioConfig {
         linkedin: process.env.NEXT_PUBLIC_LINKEDIN ?? defaultConfig.linkedin,
         twitter: process.env.NEXT_PUBLIC_TWITTER ?? defaultConfig.twitter,
         skills: parseSkills(process.env.NEXT_PUBLIC_SKILLS),
-        projects: parseProjects(process.env.NEXT_PUBLIC_PROJECTS),
+        projects: parseJSON(process.env.NEXT_PUBLIC_PROJECTS, defaultConfig.projects),
+        blogPosts: parseJSON(process.env.NEXT_PUBLIC_BLOG_POSTS, defaultConfig.blogPosts),
     };
 }
